@@ -46,6 +46,13 @@ def preprocess():
                     hspace=0.35)
     plt.show()
 
+
+    norm_course = 'Care of Magical Creatures'
+    _ = plt.figure(figsize=(10, 10))
+    ax = sns.histplot(data=df_normal, x=norm_course, hue=targert_col, kde=True, common_norm=True, stat="density")
+    ax.set_xlabel(norm_course, fontsize=14)
+    plt.show()
+
 def main():
     preprocess()
 
