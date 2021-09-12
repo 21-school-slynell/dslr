@@ -1,1 +1,2 @@
 from .sly_linear_regression import SlyLinearRegression
+from .sly_log_regression import SlyLogRegression
