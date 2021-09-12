@@ -23,8 +23,9 @@ def preprocess():
     labelTransform = LabelEncoder()
     labelTransform.fit(y)
     y = labelTransform.transform(y)
-
-    X = df[df.describe().columns[1:]]
+    remove_feat = ['Arithmancy', 'Index', 'Astronomy', 'Potions', 'Care of Magical Creatures', 'Hogwarts House']
+    feat = list(set(df.describe().columns) - set(remove_feat))
+    X = df[feat]
     X = X.fillna(X.mean())
     X = (X - X.mean()) / X.std()
 

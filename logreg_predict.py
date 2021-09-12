@@ -11,12 +11,10 @@ def preprocess():
     if len(sys.argv) == 1:
         snackbar("Set file name", 'error')
     df = read_csv(sys.argv[1])
-    col = list(df.describe().columns)
-
+    remove_feat = ['Arithmancy', 'Index', 'Astronomy', 'Potions', 'Care of Magical Creatures', 'Hogwarts House']
+    feat = list(set(df.describe().columns) - set(remove_feat))
     targert_col = 'Hogwarts House'
-    col.remove("Index")
-    col.remove(targert_col)
-    X = df[col]
+    X = df[feat]
     X = X.fillna(X.mean())
     X = (X - X.mean()) / X.std()
     if(df.shape[0] == 0 or df.shape[1] == 0 or X.shape[0] == 0 or X.shape[1] == 0):
