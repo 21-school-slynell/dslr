@@ -19,7 +19,14 @@ def preprocess():
     X = (X - X.mean()) / X.std()
     if(df.shape[0] == 0 or df.shape[1] == 0 or X.shape[0] == 0 or X.shape[1] == 0):
         snackbar("Your dataset is empty", 'error')
-    weight = pd.read_csv('./weight.csv', index_col="Index")
+    try:
+        weight = pd.read_csv('./weight.csv', index_col="Index")
+    except OSError:
+        snackbar("Can\'t open file ({name})".format(name='weight.csv'), 'error')
+    except (ValueError, IndexError):
+        snackbar("Not valid file ({name})".format(name='weight.csv'), 'error')
+    except Exception:
+        snackbar("Unknown error", 'info')
     if(X.shape[1] + 1 != weight.shape[0] or weight.shape[1] == 0):
         snackbar("Your weight is empty or incorrect", 'error')
 
